@@ -17,7 +17,16 @@
                 <?= $contenu ?>   <!-- Élément spécifique -->
             </div> <!-- #contenu -->
             <footer id="piedBlog">
-                Blog réalisé avec PHP, HTML5 et CSS.
+                <p>
+                    Blog réalisé avec PHP, HTML5 et CSS.
+                </p>
+                <p>
+                <form action="apropos.html">
+                    <p> 
+                        <input type="submit" value="À propos" /> <br/> 
+                    </p>    
+                </form>
+                </p>
             </footer>
         </div> <!-- #global -->
 <script type="text/javascript" src="http://code.jquery.com/jquery-1.9.1.min.js"></script>

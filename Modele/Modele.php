@@ -33,9 +33,16 @@ function getRegisteredAction($id) {
 function getEvents($id) {
     $bdd = getBdd();
     $events = $bdd->prepare('select * from ASSETS_EVENTS'
-            . ' where PK_Event_ID = ?');
+            . ' where FK_Register_ID = ?');
     $events->execute(array($id));
     return $events;
+}
+
+function modifier($id) {
+    $bdd = getBdd();
+    $event = $bdd->prepare("UPDATE ASSET_EVENTS SET Event_Type = ?, Event_Amount = ?, Event_Description	 = ? 	Invoice_Paid = ? courielClient = ? WHERE PK_Event_ID = ?");
+    $event->execute(array($event['Event_Type'], $event['Event_Amount'], $event['Event_Description'], $event['Invoice_Paid'], $event['courielClient'], $event['PK_Event_ID']));
+    return $event;
 }
 
 function getEvent($id) {
@@ -50,7 +57,7 @@ function getEvent($id) {
     return $event;
 }
 
-function deleteCommentaire($id) {
+function deleteEvent($id) {
     $bdd = getBdd();
     $result = $bdd->prepare('DELETE FROM ASSETS_EVENTS'
             . ' WHERE PK_Event_ID = ?');
@@ -60,8 +67,8 @@ function deleteCommentaire($id) {
 
 function setEvent($event) {
     $bdd = getBdd();
-    $result = $bdd->prepare('INSERT INTO ASSETS_EVENTS (FK_Customer_ID,	FK_Register_ID, Event_Type, Event_Date, Event_Amount, Event_Description, Invoice_Paid) VALUES( 3, ?, ?, NOW(), ?, ?, ?)');
-    $result->execute(array($event['action_id'], $event['Event_Type'], $event['Event_Amount'], $event['Event_Description'], $event['Invoice_Paid']));
+    $result = $bdd->prepare('INSERT INTO ASSETS_EVENTS (FK_Customer_ID,	FK_Register_ID, courielClient,  Event_Type, Event_Date, Event_Amount, Event_Description, Invoice_Paid) VALUES( 3, ?, ?, ?, NOW(), ?, ?, ?)');
+    $result->execute(array($event['action_id'], $event['courielClient'], $event['Event_Type'], $event['Event_Amount'], $event['Event_Description'], $event['Invoice_Paid']));
     return $result;
 }
 
